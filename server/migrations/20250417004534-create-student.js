@@ -18,18 +18,17 @@ module.exports = {
         length: 100
       },
       classes: {
-        type: Sequelize.ENUM('X', 'XI', 'XII')
+        type: Sequelize.ENUM("X", "XI", "XII", "XIII")
       },
       gender: {
-        type: Sequelize.ENUM('M', 'F')
+        type: Sequelize.ENUM("M", "F")
       },
       major_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'majors',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
+          key: 'id',
+          model: 'majors'
+        }
       },
       createdAt: {
         allowNull: false,

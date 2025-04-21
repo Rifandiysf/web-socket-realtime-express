@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #messageBox {
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        input, button {
+            padding: 8px;
+            margin-right: 5px;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tes Notifikasi WebSocket</h1>
+    <div id="messageBox"></div>
+    <div>
+        <input type="text" id="messageInput" placeholder="Ketik pesan">
+        <button id="sendButton">Kirim Pesan</button>
+    </div>
+    <script>
+        const messageBox = document.getElementById('messageBox');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+
+        const socket = new WebSocket('ws://127.0.0.1:3000');
+
+        socket.addEventListener('open', (event) => {
+            appendMessage('Terhubung ke server');
+        });
+
+        socket.addEventListener('message', (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === 'notification') {
+        appendMessage(`Notifikasi: ${JSON.stringify(data.data)}`);
+      } else if (data.type === 'broadcast') {
+        appendMessage(`Broadcast: ${JSON.stringify(data.data)}`);
+      } else if (data.type === 'connection') {
+        appendMessage(`Server: ${data.message}`);
+      }
+    });
+
+    socket.addEventListener('close', (event) => {
+      appendMessage('Terputus dari server');
+    });
+
+
+    sendButton.addEventListener('click', () => {
+      const message = messageInput.value;
+
+      if (message) {
+        socket.send(JSON.stringify({
+          text: message,
+          timestamp: new Date().toISOString()
+        }));
+
+        messageInput.value = '';
+      }
+    });
+
+    messageInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        sendButton.click();
+      }
+    });
+
+    function appendMessage(message) {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = message;
+      messageBox.appendChild(messageElement);
+      messageBox.scrollTop = messageBox.scrollHeight;
+    }
+    </script>
+  </body>
+</html>
