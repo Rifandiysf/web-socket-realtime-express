@@ -32,3 +32,5 @@ coverage/
 # Build output
 dist/
 build/
+
+*.rest

@@ -18,7 +18,7 @@ module.exports = (app) => {
     const idValidation = param('id').isInt().withMessage('ID must be an integer');
 
     router.get('/', student_ctrl.read)
-    router.get('/:id', [idValidation],student_ctrl.readByID)
+    router.get('/:id', [idValidation],student_ctrl.detail)
     router.post('/', [Validation] ,student_ctrl.create)
     router.put('/:id', [Validation,idValidation],student_ctrl.update)
     router.delete('/:id', [idValidation],student_ctrl.delete)

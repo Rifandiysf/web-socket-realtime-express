@@ -8,3 +8,6 @@ Content-Type: application/json
     "gender": "M",
     "major_id": 1
 }
+
+###
+GET http://127.0.0.1:3000/v1/student/2

@@ -5,7 +5,12 @@ let self = {}
 
 self.read = async (req, res) => {
     try {
-        const students = await db.student.findAll();
+        const students = await db.student.findAll({
+            attribute: ['id', 'firstName', 'lastName', 'classes', 'gender'],
+            include: {
+                model: db.major
+            }
+        });
         res.status(200).json({
             message: "Students fetched successfully",
             data: students
@@ -19,13 +24,18 @@ self.read = async (req, res) => {
 }
 
 
-self.readByID = async (req, res) => {
+self.detail = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
     try {
-        const student = await db.student.findByPk(req.params.id);
+        const student = await db.student.findByPk(req.params.id,{
+            attribute: ['id', 'firstName', 'lastName', 'classes', 'gender'],
+            include: {
+                model: db.major
+            }
+        });
         
         if (!student) {
             return res.status(404).json({
