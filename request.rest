@@ -1,0 +1,10 @@
+POST http://127.0.0.1:3000/v1/student
+Content-Type: application/json
+
+{
+    "firstName": "Lutfi",
+    "lastName": "Pratama",
+    "classes": "XI",
+    "gender": "M",
+    "major_id": 1
+}
