@@ -98,26 +98,4 @@ app.post('/send-notification', (req, res) => {
     res.status(200).json({ message: 'Notifikasi berhasil dikirim' });
 });
 
-app.listen(port, () => {console.log(`Server running at http://${hostName}:${port}`)})
-// app.use('/', () => {
-//     routes.get('/student', (req, res) => {
-//         res.status(200).json({
-//             message: "helo dunia"
-//         })
-//     })
-// })
-
-// const {createServer} = require('http')
-
-// const hostName = '127.0.0.1'
-// const port = 3000
-
-// const server = createServer((req, res) => {
-//     res.statusCode = 200
-//     res.setHeader('Content-Type', 'text/plain')
-//     res.end('Hello World! im a human programmer hahayyyy')
-// })
-
-// server.listen(port, hostName, () => {
-//     console.log(`server running at http://${hostName}:${port}`)
-// })
+app.listen(port, () => {console.log(`Server running at http://${hostName}:${port}`)})   
