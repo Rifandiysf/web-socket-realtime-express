@@ -1,13 +1,31 @@
-POST http://127.0.0.1:3000/v1/student
+POST http://127.0.0.1:3002/send-message
 Content-Type: application/json
 
 {
-    "firstName": "Lutfi",
-    "lastName": "Pratama",
-    "classes": "XI",
-    "gender": "M",
-    "major_id": 1
+    "name": "Rifandi",
+    "message": "hallo"
 }
 
 ###
-GET http://127.0.0.1:3000/v1/student/2
+POST http://127.0.0.1:3000/v1/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "Rifandi",
+    "lastName": "Yusuf",
+    "username": "hai",
+    "email": "rifandiysf@gmail.com",
+    "classes": "XI",
+    "gender": "M",
+    "major_id": 1,
+    "password": "123456"
+}
+
+###
+POST http://127.0.0.1:3000/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "hai",
+    "password": "123456"
+}

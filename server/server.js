@@ -17,6 +17,8 @@ const hostName = '127.0.0.1'
 const {Sequelize} = require('sequelize')
 const authRoutes = require('./routes/authRoutes');
 const studentRoute = require('./routes/studentRoute');
+const cors = require('cors');
+const majorRoutes = require('./routes/majorRoutes');
 
 const sequelize = new Sequelize({
     database: 'pi_medsos',
@@ -38,8 +40,14 @@ const sequelize = new Sequelize({
     }
 })();
 
-app.use('/v1/auth', authRoutes(express))
+const corsOption = {
+    origin: 'http://localhost:5173'
+}
+
+app.use('/v1/auth', cors(corsOption), authRoutes(express))
 app.use('/v1/student', studentRoute(express))
+app.use('/v1/post',cors(corsOption), studentRoute(express))
+app.use('/v1', cors(corsOption), majorRoutes(express))
 
 app.get('/', async(req, res) => {
     try {
