@@ -1,5 +1,5 @@
 const { body } = require("express-validator")
-const { authenticateJWT } = require('../controllers/posting_ctrl.js')
+const { authenticateJWT } = require('../middleware/authMiddleware.js')
 const posting_ctrl = require('../controllers/posting_ctrl.js')
 
 module.exports = (app) => {
@@ -9,7 +9,6 @@ module.exports = (app) => {
     ]
 
     router.get('/list', authenticateJWT, posting_ctrl.list)
-    
     router.post('/create', authenticateJWT, Validation, posting_ctrl.save) 
 
     return router

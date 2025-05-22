@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const db = require('../models');
 
 let self = {}
@@ -9,7 +10,7 @@ self.save = async (req, res) => {
     }
     try {
         const { content_text } = req.body;
-        await db.post.create({
+        await db?.post?.create({
             content_text: content_text,
             private: "FALSE",
             user_id: req?.user?.data?.id
@@ -24,11 +25,19 @@ self.save = async (req, res) => {
     }
 }
 
-self.list = async (req, res) => {
-    let data = await post.findAll({
-        include: {
-            model: user
-        }
+self.list = async (_, res) => {
+    let data = await db?.post?.findAll({
+        include: [{
+            model: db?.user,
+            attributes: ["username"]
+        },{
+            model: db?.comment,
+            include: [{
+                model: db?.user
+            }
+            ]
+        },
+        ]
     })
     res.status(200).json({
         message: 'posts id found',

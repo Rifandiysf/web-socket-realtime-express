@@ -2,7 +2,6 @@ const { validationResult } = require('express-validator');
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-const { where } = require('sequelize');
 
 let self = {}
 
@@ -65,7 +64,7 @@ self.login = async (req, res) => {
             include: [
                 { model: db.roles,
                     attributes: ['id']
-                 },
+                },
                 { model: db.student }
             ],
             where: {

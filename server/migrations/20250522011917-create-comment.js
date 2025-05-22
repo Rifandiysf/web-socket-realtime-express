@@ -2,22 +2,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('posts', {
+    await queryInterface.createTable('comments', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      private: {
-        type: Sequelize.ENUM("TRUE", "FALSE")
-      },
-      content_text: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      content_image: {
-        type: Sequelize.TEXT,
-        allowNull: true,
+      post_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'posts',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       user_id: {
         type: Sequelize.UUID,
@@ -26,7 +24,14 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+      },
+      content_comment_image: {
+        type: Sequelize.TEXT,
+      },
+      content_comment_text: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('posts');
+    await queryInterface.dropTable('comments');
   }
 };

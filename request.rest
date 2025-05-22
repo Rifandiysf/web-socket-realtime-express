@@ -13,8 +13,8 @@ Content-Type: application/json
 {
     "firstName": "Rifandi",
     "lastName": "Yusuf",
-    "username": "hai",
-    "email": "rifandiysf@gmail.com",
+    "username": "cipung",
+    "email": "cipung@gmail.com",
     "classes": "XI",
     "gender": "M",
     "major_id": 1,
@@ -28,4 +28,36 @@ Content-Type: application/json
 {
     "username": "hai",
     "password": "123456"
+}
+
+###
+GET http://127.0.0.1:3000/v1/major
+
+###
+POST http://127.0.0.1:3000/v1/post/create
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlmZjE0NWU1LTAwOWUtNGYyMi1hMGJkLTc4NzRhOTg2NjlmNiIsInVzZXJuYW1lIjoiaGFpIiwiZW1haWwiOiJyaWZhbmRpeXNmQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IlJpZmFuZGkiLCJsYXN0TmFtZSI6Ill1c3VmIiwiY2xhc3NlcyI6IlhJIiwiZ2VuZGVyIjoiTSIsImlhdCI6MTc0Nzg3ODg4MywiZXhwIjoxNzQ3OTY1MjgzfQ.qkcG6O-eR21-N_R1O96jrLZ1DLKRqrQ6q2iBk1v0YRY
+
+{
+    "content_text": "hello"
+}
+
+###
+GET http://127.0.0.1:3000/v1/post/list
+Content-Type: application/json
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlmZjE0NWU1LTAwOWUtNGYyMi1hMGJkLTc4NzRhOTg2NjlmNiIsInVzZXJuYW1lIjoiaGFpIiwiZW1haWwiOiJyaWZhbmRpeXNmQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IlJpZmFuZGkiLCJsYXN0TmFtZSI6Ill1c3VmIiwiY2xhc3NlcyI6IlhJIiwiZ2VuZGVyIjoiTSIsImlhdCI6MTc0Nzg3ODg4MywiZXhwIjoxNzQ3OTY1MjgzfQ.qkcG6O-eR21-N_R1O96jrLZ1DLKRqrQ6q2iBk1v0YRY
+
+###
+GET http://127.0.0.1:3000/v1/comment/list
+Content-Type: application/json
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlmZjE0NWU1LTAwOWUtNGYyMi1hMGJkLTc4NzRhOTg2NjlmNiIsInVzZXJuYW1lIjoiaGFpIiwiZW1haWwiOiJyaWZhbmRpeXNmQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IlJpZmFuZGkiLCJsYXN0TmFtZSI6Ill1c3VmIiwiY2xhc3NlcyI6IlhJIiwiZ2VuZGVyIjoiTSIsImlhdCI6MTc0Nzg3ODg4MywiZXhwIjoxNzQ3OTY1MjgzfQ.qkcG6O-eR21-N_R1O96jrLZ1DLKRqrQ6q2iBk1v0YRY
+
+###
+POST http://127.0.0.1:3000/v1/comment/create
+Content-Type: application/json
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlmZjE0NWU1LTAwOWUtNGYyMi1hMGJkLTc4NzRhOTg2NjlmNiIsInVzZXJuYW1lIjoiaGFpIiwiZW1haWwiOiJyaWZhbmRpeXNmQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IlJpZmFuZGkiLCJsYXN0TmFtZSI6Ill1c3VmIiwiY2xhc3NlcyI6IlhJIiwiZ2VuZGVyIjoiTSIsImlhdCI6MTc0Nzg3ODg4MywiZXhwIjoxNzQ3OTY1MjgzfQ.qkcG6O-eR21-N_R1O96jrLZ1DLKRqrQ6q2iBk1v0YRY
+
+{
+    "content_comment_text": "hhahaha",
+    "post_id": "76c97c02-fbc7-481e-9534-2ad8e9698952"
 }

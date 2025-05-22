@@ -13,11 +13,12 @@ module.exports = (app) => {
             .isString({ min: 6, max: 20 }).withMessage('Last name must be a string'),
         body('username').notEmpty().withMessage('Last name is required')
             .isString({ min: 6, max: 20 }).withMessage('Last name must be a string')
-            .custom(async(value) => {
+            .custom(async (value) => {
                 let UserNameCheck = await user.findOne({
                     where: {
                         username: value
-                    }
+                    },
+                    attributes: ["id"] 
                 })
                 if(!!UserNameCheck) {
                     throw new Error('Username already exists')
@@ -29,7 +30,8 @@ module.exports = (app) => {
                 let UserNameCheck = await user.findOne({
                     where: {
                         email: value
-                    }
+                    },
+                    attributes: ["id"]
                 })
                 if(!!UserNameCheck) {
                     throw new Error('Email already exists')
@@ -51,8 +53,9 @@ module.exports = (app) => {
             .custom(async(value) => {
                 let UserNameCheck = await user.findOne({
                     where: {
-                        username: value
-                    }
+                        username: value,
+                    },
+                    attributes: ["id"]
                 })
                 if(!!UserNameCheck == false) {
                     throw new Error('Username Not Registered')

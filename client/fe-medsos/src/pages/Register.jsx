@@ -11,8 +11,21 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Grid from '@mui/material/Grid';
+import {useForm} from 'react-hook-form'
+import { fetchMajor } from '../redux/action/majorAction.jsx';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
+    const {register, handleSubmit} = useForm()
+    const onSubmit = (value) => { console.log(value) }
+    const major = useSelector(root => root?.major)
+    const dispath = useDispatch()
+    
+    useEffect(() => {
+        dispath(fetchMajor())
+    },[])
 
   return (
         <div>
@@ -24,7 +37,7 @@ const Register = () => {
                     </Typography>
                     <Box
                     component="form"
-                    // onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     noValidate
                     sx={{
                         display: 'flex',
@@ -37,8 +50,6 @@ const Register = () => {
                                 <FormControl fullWidth>
                                     <FormLabel htmlFor="firstname">First Name</FormLabel>
                                         <TextField
-                                        // error={nameError}
-                                        // helperText={nameErrorMessage}
                                         id="firstname"
                                         type="text"
                                         name="name"
@@ -48,7 +59,7 @@ const Register = () => {
                                         required
                                         fullWidth
                                         variant="outlined"
-                                        // color={emailError ? 'error' : 'primary'}
+                                        {...register('firstName')}
                                         />
                                 </FormControl>
                             </Grid>
@@ -56,8 +67,6 @@ const Register = () => {
                                 <FormControl fullWidth>
                                     <FormLabel htmlFor="lastname">Last Name</FormLabel>
                                     <TextField
-                                    // error={nameError}
-                                    // helperText={nameErrorMessage}
                                     id="lastname"
                                     type="text"
                                     name="name"
@@ -67,7 +76,7 @@ const Register = () => {
                                     required
                                     fullWidth
                                     variant="outlined"
-                                    // color={emailError ? 'error' : 'primary'}
+                                    {...register('lastName')}
                                     />
                                 </FormControl>
                             </Grid>
@@ -75,8 +84,6 @@ const Register = () => {
                                 <FormControl fullWidth>
                                     <FormLabel htmlFor="username">Username</FormLabel>
                                         <TextField
-                                        // error={nameError}
-                                        // helperText={nameErrorMessage}
                                         id="username"
                                         type="text"
                                         name="name"
@@ -86,7 +93,7 @@ const Register = () => {
                                         required
                                         fullWidth
                                         variant="outlined"
-                                        // color={emailError ? 'error' : 'primary'}
+                                        {...register('username')}
                                         />
                                 </FormControl>
                             </Grid>
@@ -94,8 +101,6 @@ const Register = () => {
                                 <FormControl fullWidth>
                                     <FormLabel htmlFor="email">Email</FormLabel>
                                     <TextField
-                                    // error={emailError}
-                                    // helperText={emailErrorMessage}
                                     id="email"
                                     type="email"
                                     name="email"
@@ -105,7 +110,7 @@ const Register = () => {
                                     required
                                     fullWidth
                                     variant="outlined"
-                                    // color={emailError ? 'error' : 'primary'}
+                                    {...register('email')}
                                     />
                                 </FormControl>
                             </Grid>
@@ -115,7 +120,7 @@ const Register = () => {
                                     <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    //   value={age}
+                                    {...register('classes')}
                                     label="Classes"
                                     //   onChange={handleChange}
                                     >
@@ -131,11 +136,22 @@ const Register = () => {
                                     <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    //   value={age}
+                                    {...register('major')}
                                     label="major"
-                                    //   onChange={handleChange}
+                                    // {
+                                    //     major?.data?.map((m, 1) => {
+                                    //         <MenuItem key={1} value={"PPLG"}>
+                                    //             {m?.name}
+                                    //         </MenuItem>
+                                    //     })
+                                    // }
                                     >
-                                        <MenuItem value={'PPLG'}>PPLG</MenuItem>
+                                        {
+                                            major?.data?.map((m, i) => {
+                                                <MenuItem key={i} value={'PPLG'}>{m?.name}</MenuItem>
+                                            })
+                                        }
+                                        
                                         <MenuItem value={'TJKT'}>TJKT</MenuItem>
                                         <MenuItem value={'DKV'}>DKV</MenuItem>
                                         <MenuItem value={'TKRO'}>TKRO</MenuItem>
@@ -176,7 +192,7 @@ const Register = () => {
                                     required
                                     fullWidth
                                     variant="outlined"
-                                    // color={passwordError ? 'error' : 'primary'}
+                                    {...register('password')}
                                     />
                                 </FormControl>
                             </Grid>

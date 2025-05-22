@@ -19,6 +19,8 @@ const authRoutes = require('./routes/authRoutes');
 const studentRoute = require('./routes/studentRoute');
 const cors = require('cors');
 const majorRoutes = require('./routes/majorRoutes');
+const postingRoutes = require('./routes/postingRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 const sequelize = new Sequelize({
     database: 'pi_medsos',
@@ -46,7 +48,8 @@ const corsOption = {
 
 app.use('/v1/auth', cors(corsOption), authRoutes(express))
 app.use('/v1/student', studentRoute(express))
-app.use('/v1/post',cors(corsOption), studentRoute(express))
+app.use('/v1/post',cors(corsOption), postingRoutes(express))
+app.use('/v1/comment',cors(corsOption), commentRoutes(express))
 app.use('/v1', cors(corsOption), majorRoutes(express))
 
 app.get('/', async(req, res) => {

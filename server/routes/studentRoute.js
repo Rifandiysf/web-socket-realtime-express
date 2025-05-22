@@ -15,13 +15,12 @@ module.exports = (app) => {
         body('major_id').notEmpty().withMessage('Major ID is required')
             .isInt({ min: 1 }).withMessage('Major ID must be a positive integer')
     ];
-    const idValidation = param('id').isInt().withMessage('ID must be an integer');
 
     router.get('/', student_ctrl.read)
-    router.get('/:id', [idValidation],student_ctrl.detail)
-    router.post('/', [Validation] ,student_ctrl.create)
-    router.put('/:id', [Validation,idValidation],student_ctrl.update)
-    router.delete('/:id', [idValidation],student_ctrl.delete)
+    router.get('/:id', student_ctrl.detail)
+    router.post('/', Validation ,student_ctrl.create)
+    router.put('/:id', Validation,student_ctrl.update)
+    router.delete('/:id', student_ctrl.delete)
 
     return router
 }
